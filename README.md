@@ -82,4 +82,4 @@ Konfigurasi proxy ada di `frontend/vite.config.js`, jadi dari sisi React kamu cu
 
 ---
 
-Made with ☕ by [namamu](https://github.com/namamu)
+Made with ☕ by [Nicholaus Risang](https://github.com/risang443)
