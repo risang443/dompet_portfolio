@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  name      String
+  email     String      @unique
+  password  String
+  createdAt DateTime    @default(now()) @map("created_at")
+  transaksi Transaksi[]
+
+  @@map("users")
+}
+
+model Transaksi {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  deskripsi String
+  jumlah    Int
+  jenis     Jenis
+  kategori  String
+  tanggal   DateTime
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("transaksi")
+}
+
+enum Jenis {
+  pemasukan
+  pengeluaran
+}
