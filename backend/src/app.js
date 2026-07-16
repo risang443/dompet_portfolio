@@ -1,16 +1,18 @@
 import express from 'express'
 import cors from 'cors'
-import authRoutes from './routes/authRoutes.js'
+import authRoutes     from './routes/authRoutes.js'
 import transaksiRoutes from './routes/transaksiRoutes.js'
+import anggaranRoutes  from './routes/anggaranRoutes.js'
 import { errorHandler } from './middleware/errorHandler.js'
 
 const app = express()
 
-app.use(cors())            // izinkan request dari frontend (beda port)
-app.use(express.json())    // parse JSON body, mirip $request->json() di Laravel
+app.use(cors())
+app.use(express.json())
 
-app.use('/api/auth', authRoutes)
+app.use('/api/auth',      authRoutes)
 app.use('/api/transaksi', transaksiRoutes)
+app.use('/api/anggaran',  anggaranRoutes)   // ← baru
 
 app.use(errorHandler)
 

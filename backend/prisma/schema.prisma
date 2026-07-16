@@ -14,6 +14,7 @@ model User {
   password  String
   createdAt DateTime    @default(now()) @map("created_at")
   transaksi Transaksi[]
+  anggaran  Anggaran[]
 
   @@map("users")
 }
@@ -30,6 +31,18 @@ model Transaksi {
   createdAt DateTime @default(now()) @map("created_at")
 
   @@map("transaksi")
+}
+
+model Anggaran {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @map("user_id")
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  kategori  String
+  batas     Int      // batas pengeluaran per bulan dalam rupiah
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@unique([userId, kategori])   // satu user hanya bisa punya 1 anggaran per kategori
+  @@map("anggaran")
 }
 
 enum Jenis {

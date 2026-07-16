@@ -9,4 +9,10 @@ export const useTransaksiStore = create((set) => ({
   setError:        (v)    => set({ error: v }),
   addTransaksi:    (item) => set((s) => ({ transaksi: [item, ...s.transaksi] })),
   deleteTransaksi: (id)   => set((s) => ({ transaksi: s.transaksi.filter((t) => t.id !== id) })),
+
+  // Baru: update satu item berdasarkan id
+  updateTransaksi: (id, data) =>
+    set((s) => ({
+      transaksi: s.transaksi.map((t) => (t.id === id ? { ...t, ...data } : t)),
+    })),
 }))
